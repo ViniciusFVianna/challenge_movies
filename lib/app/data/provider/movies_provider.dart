@@ -3,12 +3,14 @@ import 'package:get/get.dart';
 
 class MoviesProvider extends GetConnect{
   Future<Response> getMovies() async {
-    String url = ConstantsStrings.discoverMoviesEndPoint;
-    Map<String, dynamic> query = {
-    'api_key': ConstantsStrings.apiKey,
-    'language': 'pt-BR'
+    String url = ConstantsStrings.discoverMoviesEndPoint.replaceAll(':api_key', ConstantsStrings.apiKey);
+    final header = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ${ConstantsStrings.accessToken}'
     };
 
-    return get(url, query: query);
+    print(url);
+
+    return await get(url, headers: header);
   }
 }

@@ -12,6 +12,7 @@ dependencies:
   intl: 0.17.0
   dartz: 0.10.1
   flutter_feather_icons: 2.0.0+1
+  shimmer: 2.0.0
   flutter: 
     sdk: flutter
 
@@ -21,14 +22,13 @@ dev_dependencies:
     sdk: flutter
 
 flutter: 
-  uses-material-design: true
-
-  fonts:
+  fonts: 
     - family: NunitoSans
-      fonts:
+      fonts: 
         - asset: assets/fonts/NunitoSans-Bold.ttf
         - asset: assets/fonts/NunitoSans-Regular.ttf
-
-  assets:
+  assets: 
     - assets/
     - assets/fonts/
+  uses-material-design: true
+
