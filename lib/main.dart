@@ -1,3 +1,4 @@
+import 'package:challenge_movies/app/utilities/app_colors.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -14,6 +15,9 @@ void main() async {
       initialRoute: AppPages.initial,
       getPages: AppPages.routes,
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primaryColor: AppColors.colorPrimary,
+      ),
     ),
   );
 }
