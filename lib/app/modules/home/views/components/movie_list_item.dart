@@ -26,13 +26,14 @@ class MovieListItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              width: 80,
+              width: 90,
               height: 150,
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(8),
                 child: movie != null
                 && movie!.posterPath != null
-                ? Image.network(movie!.posterPath.toString())
+                ? Image.network('https://image.tmdb.org/t/p/original/${movie!.posterPath}',
+                fit: BoxFit.fitHeight,)
                 : Image.network('https://placehold.jp/80x150.png'),
               ),
             ),

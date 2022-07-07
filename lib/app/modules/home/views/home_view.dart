@@ -16,6 +16,7 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Container(
           height: double.infinity,
           width: double.infinity,
