@@ -23,15 +23,15 @@ class HomeController extends GetxController {
     fetchMovies(onSuccess: () => isLoading.value = false);
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
+  // @override
+  // void onReady() {
+  //   super.onReady();
+  // }
+  //
+  // @override
+  // void onClose() {
+  //   super.onClose();
+  // }
 
   Future<void> fetchMovies({VoidCallback? onSuccess}) async {
     isLoading.value = true;

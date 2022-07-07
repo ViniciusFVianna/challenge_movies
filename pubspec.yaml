@@ -14,6 +14,8 @@ dependencies:
   flutter_feather_icons: 2.0.0+1
   shimmer: 2.0.0
   cached_network_image: 3.2.1
+  flutter_rating_bar: 4.0.1
+  url_launcher: 6.1.4
   flutter: 
     sdk: flutter
 
@@ -31,5 +33,7 @@ flutter:
   assets: 
     - assets/
     - assets/fonts/
+    - assets/images/
+    -
   uses-material-design: true
 

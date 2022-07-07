@@ -1,9 +1,12 @@
 import 'package:challenge_movies/app/utilities/app_colors.dart';
 import 'package:challenge_movies/app/utilities/app_txt_style.dart';
+import 'package:challenge_movies/app/utilities/constants_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../data/models/movie.dart';
+import '../../../../routes/app_pages.dart';
 
 class MovieListItem extends StatelessWidget {
  const MovieListItem({
@@ -15,7 +18,7 @@ class MovieListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){},
+      onTap: () => Get.toNamed(Routes.movieDetail, parameters: { "movie_id": movie!.id.toString()}),
       child: Container(
         height: 150,
         width: double.infinity,
@@ -32,7 +35,7 @@ class MovieListItem extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
                 child: movie != null
                 && movie!.posterPath != null
-                ? Image.network('https://image.tmdb.org/t/p/original/${movie!.posterPath}',
+                ? Image.network('${ConstantsStrings.baseImageUrl}${movie!.posterPath}',
                 fit: BoxFit.fitHeight,)
                 : Image.network('https://placehold.jp/80x150.png'),
               ),

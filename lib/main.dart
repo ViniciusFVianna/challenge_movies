@@ -1,5 +1,6 @@
 import 'package:challenge_movies/app/utilities/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -17,6 +18,12 @@ void main() async {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: AppColors.colorPrimary,
+        appBarTheme: AppBarTheme(
+          color: AppColors.colorPrimary,
+          systemOverlayStyle: const SystemUiOverlayStyle(
+              statusBarBrightness: Brightness.light,
+          ),
+        )
       ),
     ),
   );

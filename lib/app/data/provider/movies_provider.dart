@@ -13,4 +13,18 @@ class MoviesProvider extends GetConnect{
 
     return await get(url, headers: header);
   }
+
+  Future<Response> getMovie(String movieId) async {
+    String url = ConstantsStrings.movieEndPoint
+        .replaceAll(':api_key', ConstantsStrings.apiKey)
+        .replaceAll(':movie_id', movieId);
+    final header = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ${ConstantsStrings.accessToken}'
+    };
+
+    print(url);
+
+    return await get(url, headers: header);
+  }
 }
