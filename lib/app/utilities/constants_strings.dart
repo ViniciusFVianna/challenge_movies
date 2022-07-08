@@ -8,6 +8,8 @@ class ConstantsStrings {
   // static const String moviesEndPoint = 'movie/550?$apiKey';
   static const String moviesEndPoint = '$baseUrl/$v3/movie/550';
   static const String movieEndPoint = '$baseUrl/$v3/movie/:movie_id?:api_key&language=pt-BR';
+  static const String upcomingEndPoint = '$baseUrl/$v3/movie/upcoming?:api_key&language=pt-BR';
+  static const String searchMovieEndPoint = '$baseUrl/$v3/search/movie?:api_key&language=pt-BR&query=:query_key';
   static const String discoverMoviesEndPoint = '$baseUrl/$v3/discover/movie?:api_key';
   static const String genersEndPoint = '$baseUrl/$v3/genre/movie/list?:api_key';
 

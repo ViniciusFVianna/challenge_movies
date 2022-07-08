@@ -30,7 +30,7 @@ class SearchWidget extends StatelessWidget {
         child: TextField(
           controller: controller.searchController.value,
           cursorColor: AppColors.colorWhite,
-          onSubmitted: (stg) => print(stg),
+          onSubmitted: (stg) => controller.fetchSearchMovies(stg),
           decoration: InputDecoration(
             border: InputBorder.none,
             enabledBorder: InputBorder.none,

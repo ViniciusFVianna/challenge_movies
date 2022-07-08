@@ -56,4 +56,27 @@ class HomeController extends GetxController {
     });
   }
 
+  Future<void> fetchSearchMovies(String query, {VoidCallback? onSuccess}) async {
+    isLoading.value = true;
+
+    final data = await repository.getSearchMovies(query);
+
+    data.fold((l) {
+      isLoading.value = false;
+      return Get.showSnackbar(GetSnackBar(
+        icon: Icon(
+          FeatherIcons.info,
+          color: AppColors.colorWhite,
+        ),
+        message: l.error.toString(),
+        backgroundColor: AppColors.colorWarning,
+        duration: const Duration(seconds: 3),
+        snackPosition: SnackPosition.BOTTOM,
+      ));
+    }, (r){
+      queryPaginated.value = r;
+      if (onSuccess != null) onSuccess();
+    });
+  }
+
 }

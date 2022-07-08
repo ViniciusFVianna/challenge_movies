@@ -93,26 +93,17 @@ class MovieDetailView extends GetView<MovieDetailController> {
                         ),
                       ),
                       const SizedBox(height: 8,),
-
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Text(
-                          'Rating',
-                          style: AppTextStyles.smallBold.copyWith(
-                            color: AppColors.colorWhite,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 4,),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: RatingBarIndicator(
-                          rating: (controller.movieDetail.value.voteAverage)! / 5,
-                          itemBuilder: (context, index) => Icon(Icons.star, color: AppColors.colorWarning,),
-                          itemCount: 5,
-                          itemSize: 24,
-                          unratedColor:  const Color(0xff33f9b300),
-                          direction: Axis.horizontal,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            _ratingCard(),
+                            const SizedBox(width: 18,),
+                            _durationCard(),
+                            const SizedBox(width: 18,),
+                            _pgCard(),
+                          ],
                         ),
                       ),
 
@@ -140,7 +131,7 @@ class MovieDetailView extends GetView<MovieDetailController> {
                               margin: const EdgeInsets.only(right: 8),
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
+                                borderRadius: BorderRadius.circular(10),
                                 border: Border.all(color: AppColors.colorTertiary),
                               ),
                               child: Text(
@@ -155,27 +146,28 @@ class MovieDetailView extends GetView<MovieDetailController> {
 
                       const SizedBox(height: 16,),
 
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Text(
-                          'Lançamento',
-                          style: AppTextStyles.smallBold.copyWith(
-                            color: AppColors.colorWhite,
-                          ),
-                        ),
-                      ),
+                     Padding(
+                       padding: const EdgeInsets.symmetric(horizontal: 20),
+                       child: Row(
+                         children: [
+                           Text(
+                             'Data de Lançamento:',
+                             style: AppTextStyles.smallBold.copyWith(
+                               color: AppColors.colorWhite,
+                             ),
+                           ),
 
-                      const SizedBox(height: 4,),
+                           const SizedBox(width: 2,),
 
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Text(
-                          DateFormat('dd/MM/yyyy').format(DateTime.parse(controller.movieDetail.value.releaseDate.toString())),
-                          style: AppTextStyles.paragraph.copyWith(
-                            color: AppColors.colorWhite,
-                          ),
-                        ),
-                      ),
+                           Text(
+                             DateFormat('dd/MM/yyyy').format(DateTime.parse(controller.movieDetail.value.releaseDate.toString())),
+                             style: AppTextStyles.paragraph.copyWith(
+                               color: AppColors.colorWhite,
+                             ),
+                           ),
+                         ],
+                       ),
+                     ),
                       const SizedBox(height: 16,),
 
                       Padding(
@@ -209,4 +201,101 @@ class MovieDetailView extends GetView<MovieDetailController> {
       ),
     );
   }
+
+  _ratingCard() => Container(
+    height: 58,
+    width: 98,
+    padding: const EdgeInsets.symmetric(
+      horizontal: 8,
+      vertical: 8,
+    ),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(10),
+      border: Border.all(color: AppColors.colorTertiary, width: 0.5),
+    ),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        RatingBarIndicator(
+          rating: (controller.movieDetail.value.voteAverage)! / 3,
+          itemBuilder: (context, index) => Icon(Icons.star, color: AppColors.colorWarning,),
+          itemCount: 5,
+          itemSize: 16,
+          unratedColor:  const Color(0xff33f9b300),
+          direction: Axis.horizontal,
+        ),
+        const SizedBox(height: 5,),
+        Text(
+          '${controller.movieDetail.value.voteAverage}/10',
+          style: AppTextStyles.paragraphBold.copyWith(
+            color: AppColors.colorWhite,
+          ),
+        )
+      ],
+    ),
+  );
+
+  _durationCard() => Container(
+    height: 58,
+    width: 98,
+    padding: const EdgeInsets.symmetric(
+      horizontal: 8,
+      vertical: 8,
+    ),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(10),
+      border: Border.all(color: AppColors.colorTertiary, width: 0.5),
+    ),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          'Duração',
+          style: AppTextStyles.small.copyWith(
+            color: AppColors.colorWhite.withOpacity(0.6),
+          ),
+        ),
+        Text(
+          '${controller.movieDetail.value.runtime} min',
+          style: AppTextStyles.paragraphBold.copyWith(
+            color: AppColors.colorWhite,
+          ),
+        ),
+      ],
+    ),
+  );
+
+  _pgCard() => Container(
+    height: 58,
+    width: 98,
+    padding: const EdgeInsets.symmetric(
+      horizontal: 8,
+      vertical: 8,
+    ),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(10),
+      border: Border.all(color: AppColors.colorTertiary, width: 0.5),
+    ),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          'Língua',
+          style: AppTextStyles.small.copyWith(
+            color: AppColors.colorWhite.withOpacity(0.6),
+          ),
+        ),
+        Text(
+          controller.movieDetail.value.originalLanguage.toString().toUpperCase(),
+          style: AppTextStyles.paragraphBold.copyWith(
+            color: AppColors.colorWhite,
+          ),
+        ),
+      ],
+    ),
+  );
+
 }

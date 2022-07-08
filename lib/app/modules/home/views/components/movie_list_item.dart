@@ -1,9 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:challenge_movies/app/utilities/app_colors.dart';
 import 'package:challenge_movies/app/utilities/app_txt_style.dart';
 import 'package:challenge_movies/app/utilities/constants_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../../data/models/movie.dart';
 import '../../../../routes/app_pages.dart';
@@ -33,11 +35,30 @@ class MovieListItem extends StatelessWidget {
               height: 150,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: movie != null
-                && movie!.posterPath != null
-                ? Image.network('${ConstantsStrings.baseImageUrl}${movie!.posterPath}',
-                fit: BoxFit.fitHeight,)
-                : Image.network('https://placehold.jp/80x150.png'),
+                child: CachedNetworkImage(
+                  imageUrl : '${ConstantsStrings.baseImageUrl}${movie!.posterPath}',
+                  fit: BoxFit.fill,
+                  placeholder: (context, url) => Shimmer.fromColors(
+                      baseColor: AppColors.colorPrimary,
+                      highlightColor: AppColors.colorSecondary,
+                      child: Container(
+                          width: double.infinity,
+                          height: MediaQuery.of(context).size.height / 2,
+                          decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.only(
+                              bottomLeft: Radius.circular(16),
+                              bottomRight: Radius.circular(16),
+                            ),
+                            color: AppColors.colorPrimary,
+                          ))),
+                  errorWidget: (context, url, error) => Container(
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/img_not_found.jpg'),
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ),
 
@@ -65,25 +86,6 @@ class MovieListItem extends StatelessWidget {
                       style: AppTextStyles.paragraph.copyWith(
                         color: AppColors.colorWhite,
                         fontSize: 16
-                      ),
-                    ),
-
-                    Text(' | ',
-                      style: AppTextStyles.paragraph.copyWith(
-                        color: AppColors.colorWhite,
-                      ),
-                    ),
-
-                    Text('+18: ',
-                      style: AppTextStyles.paragraph.copyWith(
-                        color: AppColors.colorWhite,
-                      ),
-                    ),
-                    Text(movie!.adult != true
-                      ? 'Não'
-                      : 'Sim',
-                      style: AppTextStyles.paragraph.copyWith(
-                        color: AppColors.colorWhite,
                       ),
                     ),
 
